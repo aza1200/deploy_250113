@@ -63,8 +63,8 @@ jobs:
           context: .
           push: true
           tags: |
-            ghcr.io/${{ env.OWNER_LC }}/${DOCKER_IMAGE}:${{ needs.makeTagAndRelease.outputs.tag_name }},
-            ghcr.io/${{ env.OWNER_LC }}/${DOCKER_IMAGE}:latest
+            ghcr.io/${{ env.OWNER_LC }}/${{ vars.DOCKER_IMAGE }}:${{ needs.makeTagAndRelease.outputs.tag_name }},
+            ghcr.io/${{ env.OWNER_LC }}/${{ vars.DOCKER_IMAGE }}:latest
   deploy:
     runs-on: ubuntu-latest
     needs: [ buildImageAndPush ]
@@ -80,7 +80,7 @@ jobs:
           working-directory: /
           comment: Deploy
           command: |
-            mkdir -p /dockerProjects/${DOCKER_IMAGE}
-            curl -o /dockerProjects/${DOCKER_IMAGE}/zero_downtime_deploy.py https://raw.githubusercontent.com/aza1200/deploy_250113/main/infraScript/zero_downtime_deploy.py
-            chmod +x /dockerProjects/${DOCKER_IMAGE}/zero_downtime_deploy.py
-            /dockerProjects/${DOCKER_IMAGE}/zero_downtime_deploy.py
+            mkdir -p /dockerProjects/${{ vars.DOCKER_IMAGE }}
+            curl -o /dockerProjects/${{ vars.DOCKER_IMAGE }}/zero_downtime_deploy.py https://raw.githubusercontent.com/aza1200/deploy_250113/main/infraScript/zero_downtime_deploy.py
+            chmod +x /dockerProjects/${{ vars.DOCKER_IMAGE }}/zero_downtime_deploy.py
+            /dockerProjects/${{ vars.DOCKER_IMAGE }}/zero_downtime_deploy.py
