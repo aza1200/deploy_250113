@@ -80,7 +80,7 @@ jobs:
           working-directory: /
           comment: Deploy
           command: |
-            mkdir -p /dockerProjects/${{ vars.DOCKER_IMAGE }}
+            mkdir -p /dockerProjects/${{ vars.DOCKER_IMAGE }}                        
             curl -o /dockerProjects/${{ vars.DOCKER_IMAGE }}/zero_downtime_deploy.py https://raw.githubusercontent.com/aza1200/deploy_250113/main/infraScript/zero_downtime_deploy.py
             chmod +x /dockerProjects/${{ vars.DOCKER_IMAGE }}/zero_downtime_deploy.py
             /dockerProjects/${{ vars.DOCKER_IMAGE }}/zero_downtime_deploy.py
